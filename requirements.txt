@@ -1,0 +1,28 @@
+# NSO Multi-Agent Standalone Application Requirements
+# ===================================================
+
+# Core LlamaIndex packages
+llama-index>=0.10.0
+llama-index-llms-azure-openai>=0.1.0
+
+# Web framework (Quart - async Flask)
+quart>=0.19.0
+
+# Async support
+nest-asyncio>=1.5.0
+
+# HTTP requests
+requests>=2.31.0
+
+# Environment management
+python-dotenv>=1.0.0
+
+# Logging and utilities
+pathlib>=1.0.0
+
+# Optional: For production deployment
+gunicorn>=21.0.0
+uvicorn>=0.24.0
+
+# Optional: For enhanced monitoring
+prometheus-client>=0.19.0

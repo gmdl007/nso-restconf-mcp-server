@@ -1,0 +1,21 @@
+# MCP Server Requirements for NSO Integration
+# ===========================================
+
+# MCP Server Core
+mcp>=1.0.0
+
+# LlamaIndex for AI integration
+llama-index>=0.10.0
+llama-index-core>=0.14.0
+
+# Async support
+asyncio-mqtt>=0.16.0
+
+# JSON handling
+pydantic>=2.0.0
+
+# Logging
+structlog>=23.0.0
+
+# Optional: For enhanced MCP features
+mcp-client>=1.0.0

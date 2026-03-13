@@ -1,0 +1,50 @@
+# Test scripts (temporary)
+test_live_status.py
+test_live_status_data.py
+test_exec_commands.py
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+mcp_venv/
+venv/
+env/
+
+# Environment variables
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.bak
+*~
+
+# NSO/Netsim runtime files (generated)
+netsim/xr9kv/*/logs/
+netsim/xr9kv/*/state/
+netsim/xr9kv/*/tftp-root/
