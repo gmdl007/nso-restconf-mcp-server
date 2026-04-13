@@ -44,6 +44,90 @@ Add to `~/.cursor/mcp.json` (or your MCP config). Use the path to this repo and 
 
 Device type is auto-detected; the same tools work on both.
 
+## Unix CLI Interface (nso-cli)
+
+In addition to the MCP server, this project includes a **Unix CLI tool** (`nso-cli`) that exposes the same 30+ tools as composable shell commands. This follows the emerging trend of CLI-first AI agent tooling for better token efficiency and Unix composability.
+
+### Why CLI?
+
+| | MCP | CLI |
+|---|---|---|
+| Schema overhead | ~15,000-30,000 tokens | 0 tokens |
+| Per-call overhead | ~50-100 tokens | ~20-50 tokens |
+| 10-call session | ~16,000+ tokens | ~300-500 tokens |
+| Piping/chaining | Not supported | Native Unix pipes |
+| Agent familiarity | Learns schema at runtime | Already trained on CLI patterns |
+
+### Quick Start
+
+```bash
+# Set NSO directory
+export NCS_DIR=/path/to/your/ncs/installation
+
+# Run commands directly
+python nso_cli.py devices list
+python nso_cli.py sync status --device xr9kv-1
+python nso_cli.py interfaces show --device xr9kv-1
+
+# Or use the wrapper script
+./nso-cli devices list
+./nso-cli exec cmd --device xr9kv-1 --command "show version"
+```
+
+### JSON Output for Piping
+
+```bash
+# List devices as JSON and pipe to jq
+nso-cli devices list --format json | jq '.[].name'
+
+# Check all out-of-sync devices and sync them
+nso-cli sync status --format json | \
+  jq -r '.[] | select(.status=="out-of-sync") | .device' | \
+  xargs -I{} nso-cli sync from --device {}
+
+# Run a command on all devices
+nso-cli devices list -f json | \
+  jq -r '.[].name' | \
+  xargs -I{} nso-cli exec cmd --device {} --command "show version"
+```
+
+### Available Command Groups
+
+```
+nso-cli devices      Device inventory and info
+nso-cli sync         Device synchronization
+nso-cli interfaces   Interface configuration
+nso-cli config       Configuration management
+nso-cli commit       Commit and rollback operations
+nso-cli rollback     Rollback management
+nso-cli exec         Execute commands on devices
+nso-cli services     Service discovery and management
+nso-cli ospf         OSPF service management (requires custom package)
+nso-cli ibgp         iBGP service management (requires custom package)
+nso-cli connect      Device connection management
+nso-cli monitor      Device health and monitoring
+nso-cli routing      Routing table and neighbors
+nso-cli backup       Configuration backup and restore
+nso-cli transactions Transaction and lock management
+nso-cli packages     NSO package management
+nso-cli groups       Device group management
+nso-cli health       NSO health check
+```
+
+Use `nso-cli <group> --help` for subcommand details.
+
+### MCP + CLI: Hybrid Architecture
+
+Both interfaces call the **same underlying Python functions**:
+
+```
+Your NSO Tools (shared Python functions)
+    ├── MCP Interface (fastmcp_nso_server.py)  ← for Cursor/IDE AI agents
+    └── CLI Interface (nso_cli.py)             ← for terminal, pipes, scripts
+```
+
+Use MCP for rich AI agent sessions. Use CLI for quick lookups, pipelines, and automation scripts.
+
 ## License
 
 See [LICENSE](LICENSE).

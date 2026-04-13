@@ -1,0 +1,9 @@
+#!/bin/bash
+# nso-cli: Unix CLI wrapper for NSO automation tools
+# Usage: nso-cli devices list | nso-cli sync status --device xr9kv-1 | etc.
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+export NCS_DIR="${NCS_DIR:-/opt/ncs/current}"
+export DYLD_LIBRARY_PATH="${NCS_DIR}/lib:${DYLD_LIBRARY_PATH}"
+
+exec python3 "$SCRIPT_DIR/nso_cli.py" "$@"
