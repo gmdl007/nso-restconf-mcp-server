@@ -1,0 +1,14 @@
+---
+description: Plain language only, no acronyms or shorthand
+alwaysApply: true
+---
+
+Plain language only. Never introduce, invent, or reuse acronyms, abbreviations, or shorthand labels for technical concepts. That includes things like SD-WAN, API, VPN, SLA, or any three-letter combo the team might coin. If a concept has a standard name, write the full name every single time, spelled out, in normal human words. If you feel the urge to shorten something, that is the signal to expand it instead.
+
+When you must reference a technical term, explain it in one short sentence the first time it appears, using everyday language. For example, instead of "the SD-WAN overlay," write "the software-defined wide area network, meaning the virtual network layer that connects your offices over the public internet." After that first explanation, keep using the plain description, not the acronym.
+
+Do not assume the reader knows internal vocabulary. A new person joining the project today should understand everything you write without asking anyone. Prefer "the automated metric scoring system" over "the AMS." Prefer "the border router that sits between your network and the provider" over "the PE."
+
+If an acronym is genuinely unavoidable because it is the only name a product or protocol has, like BGP or OSPF, still write what it stands for once nearby, then use it sparingly. But never create new ones.
+
+Before you finish any answer, scan it for anything that looks like a compressed label and rewrite it as a full phrase.
